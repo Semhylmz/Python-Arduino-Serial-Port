@@ -1,0 +1,43 @@
+int sensor =A0;
+int seviye;
+int esik = 600;
+
+int led=7;
+char message;
+
+void setup() {
+  pinMode(led,OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  seviye=analogRead(sensor);
+  if(seviye>esik){
+    }
+
+  
+if(Serial.available()>0){
+  message=Serial.read();
+  if(message == '1'){
+    digitalWrite(led,HIGH);
+    Serial.println("Led Yandı!");
+  }
+  if(message == '2'){
+    digitalWrite(led,LOW);
+    Serial.println("Led Söndü!");
+  }
+  if(message == '3'){
+    while(message != '4'){
+      digitalWrite(led,HIGH);
+      delay(1000);
+      digitalWrite(led,LOW);
+      delay(1000);
+      Serial.println("Flash Açık!");
+     }
+  }
+  if(message == '4'){
+    digitalWrite(led,LOW);
+    Serial.println("Flash kapalı!");  
+  }
+ }
+}
